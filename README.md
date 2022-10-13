@@ -9,6 +9,9 @@ huszonegyhez, de azt ne lépje túl.
 - A játszmák szobákban történnek és egy szobában 2-7 fő lehet egyszerre jelen.
 - Zsetonok kezelése:
   - Vagy felhasználói fiók létrehozása minden játékosnak és ott tárolni, hogy éppen mennyi zsetonja van.
+  
+    Nem lehetne fiók nélkül ? mindig csak játszmához tartozna zseton
+    
   - Minden egyes játékba lépés során alaphelyetbe kerül, azaz egy adott összegre.
 - A játékosokat valamilyen módon meg kell nevezni és asszerint megjelníteni őket az asztalnál.
 - Egy játékos a következőket tudja megtenni:
@@ -21,6 +24,10 @@ huszonegyhez, de azt ne lépje túl.
     „biztosítást” köthet. A tét legfeljebb az eredeti tét másfélszerese lehet. Ha az osztó másik
     kártyájának értéke 10 (10-es, Bubi, Dáma vagy Király), akkor a játékos a tétet 2:1 arányban kapja
     vissza. Ha az osztó másik kártyájának értéke a 10-estől eltérő, akkor az osztó nyer.
+    
+    Ezt elsőre nem  sikerült felfognom ezért lehet kihagynám, most hogy nem pontos blackjack szabályok vannak az szerintem nem fontos, inkább válalljunk keveset de azt jól csináljuk meg
+    
+    
   - **Surrender**: Ha osztás után feladja a játékos, akkor a tétjének a felét visszakapja.
   - **Bust**: Ha a lapok összértéke 21 felett van, akkor elveszti a játékot.
   - **Push**: Kifejezés, ha játékos és az osztó lapjainak értéke egyforma. Gondolom ilyenkor
