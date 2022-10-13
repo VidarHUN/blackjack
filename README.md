@@ -1,0 +1,2 @@
+# blackjack
+BME MSC Szoftverarchitektúrák
