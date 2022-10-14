@@ -8,11 +8,7 @@ huszonegyhez, de azt ne lépje túl.
 
 - A játszmák szobákban történnek és egy szobában 2-7 fő lehet egyszerre jelen.
 - Zsetonok kezelése:
-  - Vagy felhasználói fiók létrehozása minden játékosnak és ott tárolni, hogy éppen mennyi zsetonja van.
-  
-    Nem lehetne fiók nélkül ? mindig csak játszmához tartozna zseton
-    
-  - Minden egyes játékba lépés során alaphelyetbe kerül, azaz egy adott összegre.
+  - Minden egyes játékba lépés során a játékos kap egy adott zseton mennyiséget amit a játék során felhasználhat. 
 - A játékosokat valamilyen módon meg kell nevezni és asszerint megjelníteni őket az asztalnál.
 - Egy játékos a következőket tudja megtenni:
   - **Hit**: Lapkérés.
