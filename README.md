@@ -19,11 +19,7 @@ huszonegyhez, de azt ne lépje túl.
   - **Insurance**: Ha az osztó színével felfelé látszó lapja Ász, akkor a játékos ezzel a bemondással
     „biztosítást” köthet. A tét legfeljebb az eredeti tét másfélszerese lehet. Ha az osztó másik
     kártyájának értéke 10 (10-es, Bubi, Dáma vagy Király), akkor a játékos a tétet 2:1 arányban kapja
-    vissza. Ha az osztó másik kártyájának értéke a 10-estől eltérő, akkor az osztó nyer.
-    
-    Ezt elsőre nem  sikerült felfognom ezért lehet kihagynám, most hogy nem pontos blackjack szabályok vannak az szerintem nem fontos, inkább válalljunk keveset de azt jól csináljuk meg
-    
-    
+    vissza. Ha az osztó másik kártyájának értéke a 10-estől eltérő, akkor az osztó nyer.  
   - **Surrender**: Ha osztás után feladja a játékos, akkor a tétjének a felét visszakapja.
   - **Bust**: Ha a lapok összértéke 21 felett van, akkor elveszti a játékot.
   - **Push**: Kifejezés, ha játékos és az osztó lapjainak értéke egyforma. Gondolom ilyenkor
