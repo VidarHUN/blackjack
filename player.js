@@ -36,7 +36,7 @@ class Player {
             deck.push(deck.shift());
         }
         else {
-            throw new Error('The don't want new card');
+            throw new Error("The don't want new card");
         }
     }
 
@@ -96,4 +96,12 @@ class Player {
     }
 }
 
+class Dealer extends Player {
+    constructor(hand, name = "Dealer", deck) {
+        super(hand, name);
+        this.deck = deck;
+    }
+}
+
 module.exports.Player = Player;
+module.exports.Dealer = Dealer;

@@ -2,16 +2,17 @@
   "name": "blackjack",
   "version": "1.0.0",
   "description": "A huszonegy egy kártyajáték, melyet 52 lapos francia kártyával játszanak dzsókerek nélkül. Blackjack néven is ismert. A játék célja, hogy a játékos lapjai összértéke minél közelebb legyen a huszonegyhez, de azt ne lépje túl.",
-  "main": "index.js",
+  "main": "server.js",
   "files": [
-    "index.js",
+    "server.js",
     "deck.js",
     "player.js",
-    "room.js"
+    "room.js",
+    "client.js"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
