@@ -37,7 +37,7 @@ app.post('/addChips', (req, res) => {
 
 // Subsctract chips
 // '/subChips?room=roomID&user=userID&chips=amountOfChips'
-app.post('/addChips', (req, res) => {
+app.post('/subChips', (req, res) => {
     // TODO: Check if this room exists and the user is in there
     // TODO: Decrease the user's chips
     return;
