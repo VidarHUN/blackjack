@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/VidarHUN/blackjack#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
   }
 }
