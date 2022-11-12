@@ -18,9 +18,9 @@
 //   }`,
 // });
 
-response.json().then(data => {
+/*response.json().then(data => {
   console.log(data);
-});
+});*/
 
 const newRoomButton = document.getElementById('newRoomButton');
 newRoomButton.addEventListener('click', function(e) {
