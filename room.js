@@ -1,15 +1,12 @@
+const ObjectId = require('mongodb').ObjectId;
 
 class Room {
-    constructor(players) {
-        if (players.length < 2) {
-            throw new Error('Too few players');
-        }
-        else if (players.length > 7) {
-            throw new Error('Too many players');
-        }
-        else {
-            this.players = players;
-        }
+    constructor(dealer, player) {
+        this.id = new ObjectId();
+        dealer.addRoomID(this.id);
+        player.addRoomID(this.id);
+        this.dealer = dealer;
+        this.players = [player];
     }
 
     addPlayer(player) {
@@ -30,6 +27,10 @@ class Room {
         else {
             this.players.remove(player);
         }
+    }
+
+    hit() {
+        return dealer.hit();
     }
 }
 

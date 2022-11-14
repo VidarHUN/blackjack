@@ -1,55 +1,42 @@
 const Deck = require("./deck.js").Deck;
+const Room = require("./room.js").Room;
+const Player = require("./player.js").Player;
+const Dealer = require("./player.js").Dealer;
 
 const express = require('express');
 const app = express();
 const port = 3000;
 
+// TODO: Create a db where we can store rooms and users (MongoDB)
+const ROOMS = [];
+
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
-    // deck = new Deck();
-    // deck.shuffle();
-    // res.send(deck.cards);
 });
 
 // Create a new room
 app.post('/newRoom', (req, res) => {
-    // TODO: Create a new room
-    // TODO: Create a new dealer
-    // TODO: Put the user into the room
-    
-    
-    return;
+    let deck = new Deck();
+    deck.shuffle();
+    let dealer = new Dealer(deck)
+    // TODO: Get the username from the player
+    let player = new Player('test_user');
+    let room = new Room(dealer, player);
+    ROOMS.push(room)
 });
 
 // Join into a room
-// example '/room?user=userID'
 app.get('/room', (req, res) => {
-    // TODO: Find a random not full room
-    // TODO: Put the user into the room
-    console.log("room oldal")
-    return;
-});
-
-// Add chips
-// '/addChips?room=roomID&user=userID&chips=amountOfChips'
-app.post('/addChips', (req, res) => {
-    // TODO: Check if this room exists and the user is in there
-    // TODO: Increase the user's chips
-    return;
-});
-
-// Subsctract chips
-// '/subChips?room=roomID&user=userID&chips=amountOfChips'
-app.post('/subChips', (req, res) => {
-    // TODO: Check if this room exists and the user is in there
-    // TODO: Decrease the user's chips
-    return;
+    // Get a random room index
+    let idx = Math.floor(Math.random() * idx.length);
+    let player = new Player('test_user');
+    ROOMS[idx].addPlayer(player);
 });
 
 // Hit - request a card
-// '/hit?room=roomID&user=userID'
+// '/hit?user=userID'
 app.get('/hit', (req, res) => {
     // Give a card to the defined user
     return;
