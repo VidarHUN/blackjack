@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
     // deck = new Deck();
@@ -16,6 +18,8 @@ app.post('/newRoom', (req, res) => {
     // TODO: Create a new room
     // TODO: Create a new dealer
     // TODO: Put the user into the room
+    
+    
     return;
 });
 
@@ -24,6 +28,7 @@ app.post('/newRoom', (req, res) => {
 app.get('/room', (req, res) => {
     // TODO: Find a random not full room
     // TODO: Put the user into the room
+    console.log("room oldal")
     return;
 });
 

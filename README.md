@@ -14,7 +14,7 @@ huszonegyhez, de azt ne lépje túl.
   - **Hit**: Lapkérés.
   - **Stand/Stay**: Nem kér több lapot.
   - **Double**: Első két lap után lehet a tétet duplázni. Ezután már csak egy lapot kaphat a játékos.
-  - **Split**: Ha játékos elsp két lapja pár, akkor ezt két "kéz"-re oszthatja. Mind a két kézre
+  - **Split**: Ha játékos első két lapja pár, akkor ezt két "kéz"-re oszthatja. Mind a két kézre
     tehet tétet és mind két kéz külön osztásban részesül, szóval kérhet lapot külön-külön.
   - **Insurance**: Ha az osztó színével felfelé látszó lapja Ász, akkor a játékos ezzel a bemondással
     „biztosítást” köthet. A tét legfeljebb az eredeti tét másfélszerese lehet. Ha az osztó másik
