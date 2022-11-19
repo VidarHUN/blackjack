@@ -8,7 +8,7 @@ huszonegyhez, de azt ne lépje túl.
 
 - A játszmák szobákban történnek és egy szobában 2-7 fő lehet egyszerre jelen.
 - Zsetonok kezelése:
-  - Minden egyes játékba lépés során a játékos kap egy adott zseton mennyiséget amit a játék során felhasználhat. 
+  - Minden egyes játékba lépés során a játékos kap egy adott zseton mennyiséget amit a játék során felhasználhat.
 - A játékosokat valamilyen módon meg kell nevezni és asszerint megjelníteni őket az asztalnál.
 - Egy játékos a következőket tudja megtenni:
   - **Hit**: Lapkérés.
@@ -19,7 +19,7 @@ huszonegyhez, de azt ne lépje túl.
   - **Insurance**: Ha az osztó színével felfelé látszó lapja Ász, akkor a játékos ezzel a bemondással
     „biztosítást” köthet. A tét legfeljebb az eredeti tét másfélszerese lehet. Ha az osztó másik
     kártyájának értéke 10 (10-es, Bubi, Dáma vagy Király), akkor a játékos a tétet 2:1 arányban kapja
-    vissza. Ha az osztó másik kártyájának értéke a 10-estől eltérő, akkor az osztó nyer.  
+    vissza. Ha az osztó másik kártyájának értéke a 10-estől eltérő, akkor az osztó nyer.
   - **Surrender**: Ha osztás után feladja a játékos, akkor a tétjének a felét visszakapja.
   - **Bust**: Ha a lapok összértéke 21 felett van, akkor elveszti a játékot.
   - **Push**: Kifejezés, ha játékos és az osztó lapjainak értéke egyforma. Gondolom ilyenkor

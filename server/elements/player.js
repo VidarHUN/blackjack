@@ -1,12 +1,18 @@
-
+const ObjectId = require('mongodb').ObjectId;
+const Room = require('./room.js').Room;
 class Player {
-    constructor(hand, name) {
-        this.hand = hand;
+    constructor(name) {
+        this._id = new ObjectId();
+        this.hand = [];
         this.second_hand = []; // Used when to player splits
         this.chips = 5000;
         this.name = name;
         this.stand = false;
         this.bet = 0;
+    }
+
+    addRoomID(id) {
+        this.room_id = id;
     }
 
     addCard(card, second_hand = false) {
@@ -29,11 +35,19 @@ class Player {
         }
     }
 
-    hit(deck) {
+    hit(second_hand = false) {
         if (!this.stand) {
-            second_hand = this.second_hand > 0 ? true : false;
-            this.addCard(deck[0], second_hand);
-            deck.push(deck.shift());
+            // TODO: get room via room_id
+            // Just for now I will use this line
+            let room = new Room();
+            if (second_hand) {
+                let card = room.hit();
+                this.addCard(card, second_hand);
+            }
+            else {
+                let card = room.hit();
+                this.addCard(card);
+            }
         }
         else {
             throw new Error("The don't want new card");
@@ -97,9 +111,15 @@ class Player {
 }
 
 class Dealer extends Player {
-    constructor(hand, name = "Dealer", deck) {
-        super(hand, name);
+    constructor(name = "Dealer", deck) {
+        super(name);
         this.deck = deck;
+    }
+
+    hit() {
+        card = deck[0];
+        this.deck.push(this.deck.shift());
+        return card;
     }
 }
 
