@@ -2,7 +2,7 @@ const ObjectId = require('mongodb').ObjectId;
 const Room = require('./room.js').Room;
 class Player {
     constructor(name) {
-        this.id = new ObjectId();
+        this._id = new ObjectId();
         this.hand = [];
         this.second_hand = []; // Used when to player splits
         this.chips = 5000;

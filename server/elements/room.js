@@ -2,7 +2,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 class Room {
     constructor(dealer, player) {
-        this.id = new ObjectId();
+        this._id = new ObjectId();
         dealer.addRoomID(this.id);
         player.addRoomID(this.id);
         this.dealer = dealer;
@@ -34,4 +34,4 @@ class Room {
     }
 }
 
-model.exports.Room = Room;
+module.exports.Room = Room;
