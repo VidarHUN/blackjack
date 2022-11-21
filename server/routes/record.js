@@ -16,13 +16,14 @@ const dbo = require('../db/conn');
 
 // Create a new room
 recordRoutes.route('/newRoom').post(function (req, res)  {
+    const username = req.body.username;
     let deck = new Deck();
     deck.shuffle();
     console.log("New deck created and shuffled");
     let dealer = new Dealer(deck)
     console.log("New Dealer created!");
     // TODO: Get the username from the player
-    let player = new Player('test_user');
+    let player = new Player(username);
     console.log("New Player added!");
     let room = new Room(dealer, player);
     console.log("New room created!");
@@ -33,9 +34,9 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
         .insertOne(room, function (err, result) {
             if (err) {
                 res.status(400).send('Error inserting rooms!');
+                return;
             } else {
                 console.log(`Added a new room with id ${result.insertedId}`);
-                res.status(204).send();
             }
     });
     dbConnect
@@ -43,11 +44,12 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
         .insertMany([player, dealer], function (err, result) {
             if (err) {
                 res.status(400).send('Error inserting players!');
+                return;
             } else {
-                console.log(`Added a new player(s) with id ${result.insertedId}`);
-                res.status(204).send();
+                console.log(`Added a new player(s) with id ${result.insertedIds}`);
             }
     });
+    res.status(204).send();
 });
 
 // Join into a room

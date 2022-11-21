@@ -111,9 +111,10 @@ class Player {
 }
 
 class Dealer extends Player {
-    constructor(name = "Dealer", deck) {
+    constructor(deck, name = "Dealer") {
         super(name);
         this.deck = deck;
+        console.log(this);
     }
 
     hit() {
