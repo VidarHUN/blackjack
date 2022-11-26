@@ -2,6 +2,7 @@ import {React, useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
+
 const Index = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
@@ -15,12 +16,16 @@ const Index = () => {
         const response = await axios.post('http://localhost:4000/newRoom', {
             username: username
         });
-
+        
+        const params = new URLSearchParams();
+        params.append("playerId", response.data.player)
+        params.append("roomId", response.data.room)
         if(response.status == 200){
-            navigate('/game');
+            console.log(response.data)
+            navigate('/game?' + params.toString());
         } else {
             console.log("User or room creation failed")
-        }        
+        }      
     };
 
     async function handleRoomButton() {
@@ -30,10 +35,12 @@ const Index = () => {
         });
 
         if(response.status === 200){
+            
             navigate('/game');
         } else {
             console.log("User creation or room selection failed")
         }   
+        
     };
 
     return (

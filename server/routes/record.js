@@ -98,7 +98,7 @@ recordRoutes.route('/room').post(function (req, res)  {
 // Hit - request a card
 // '/hit?user=userID'
 recordRoutes.route('/hit').get(async function (_req, res) {
-
+        
 });
 
 recordRoutes.route('/double').post(function (req, res)  {
