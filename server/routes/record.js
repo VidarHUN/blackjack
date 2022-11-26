@@ -49,7 +49,25 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
                 console.log(`Added a new player(s) with id ${result.insertedIds}`);
             }
     });
-    res.status(204).send();
+    res.status(204).send(room);
+    
+});
+
+// Send the available rooms to fontend
+recordRoutes.route('/room').get(function (req, res)  {
+    console.log("room get")
+
+    const dbConnect = dbo.getDb();
+    dbConnect
+        .collection('rooms')
+        .find().project({dealer: 0, players: 0})
+        .toArray(function (err, result) {
+            if (err) {
+                res.status(400).send('Error when querying db');
+            } else {
+                res.json(result);
+            }
+    });
 });
 
 // Join into a room

@@ -21,6 +21,7 @@ const Index = () => {
 
     const handleRoomButton = () => {
         console.log("roomButton pressed")
+        axios.get('http://localhost:4000/room')
         // TODO: Check if the room selection and user creation was correct
         // navigate('/game');
     };
@@ -36,7 +37,7 @@ const Index = () => {
             </form>
             <button onClick={handleNewRoom} id="newRoomButton">Create a new room</button>
             <button onClick={handleRoomButton} id="roomButton">Join room</button>
-        </div>
+            </div>
     );
 };
 
