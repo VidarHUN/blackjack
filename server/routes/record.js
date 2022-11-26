@@ -49,6 +49,7 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
                 console.log(`Added a new player(s) with id ${result.insertedIds}`);
             }
     });
+
     res.json({player: player._id,
               room: room._id});
     res.status(200).send();
@@ -56,7 +57,35 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
 });
 
 // Join into a room
+//TODO return room object or room object id
 recordRoutes.route('/room').post(function (req, res)  {
+    const username = req.body.username;
+    let player = new Player(username);
+    console.log("New Player added!");
+    const dbConnect = dbo.getDb();
+
+    dbConnect
+        .collection('players')
+        .insertOne(player, function (err, result) {
+            if (err) {
+                res.status(400).send('Error inserting players!');
+                return;
+            } else {
+                console.log(`Added a new player with id ${result.insertedId}`);
+            }
+    });
+
+    let room = dbConnect
+    //Suppose to return one record randomly from db where number_of_players less then 7
+        .collection('rooms').aggregate([
+            { $match: { number_of_players: {$lt: 7 } }},
+            { $sample: { size: 1 } }
+        ])
+    console.log(room)
+    //res.json({player: player._id,
+    //    room: room._id});
+    res.json(room);
+    res.status(200).send();
     
 });
 // app.get('/room', (req, res) => {

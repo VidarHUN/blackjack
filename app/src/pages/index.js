@@ -11,7 +11,7 @@ const Index = () => {
     };
 
     async function handleNewRoom() {
-        console.log("newRooomButton pressed")
+        console.log("newRoomButton pressed")
         const response = await axios.post('http://localhost:4000/newRoom', {
             username: username
         });
@@ -19,15 +19,21 @@ const Index = () => {
         if(response.status == 200){
             navigate('/game');
         } else {
-            console.log("User or room creation faild")
+            console.log("User or room creation failed")
         }        
     };
 
-    const handleRoomButton = () => {
+    async function handleRoomButton() {
         console.log("roomButton pressed")
-        axios.get('http://localhost:4000/room')
-        // TODO: Check if the room selection and user creation was correct
-        // navigate('/game');
+        const response = await axios.post('http://localhost:4000/room', {
+            username: username
+        });
+
+        if(response.status === 200){
+            navigate('/game');
+        } else {
+            console.log("User creation or room selection failed")
+        }   
     };
 
     return (
