@@ -1,6 +1,7 @@
 import {React, useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import './index.css';
 
 
 const Index = () => {
@@ -17,10 +18,10 @@ const Index = () => {
             username: username
         });
         
-        const params = new URLSearchParams();
+        let params = new URLSearchParams();
         params.append("playerId", response.data.player)
         params.append("roomId", response.data.room)
-        if(response.status == 200){
+        if(response.status === 200){
             console.log(response.data)
             navigate('/game?' + params.toString());
         } else {
@@ -48,13 +49,13 @@ const Index = () => {
             <h1>Play blackjack with us!</h1>
             <form>
                 <label>
-                    Username:
+                    Enter your username!
                     <input type="text" name="username" value={username} onChange={handleChange}/>
                 </label>
             </form>
             <button onClick={handleNewRoom} id="newRoomButton">Create a new room</button>
             <button onClick={handleRoomButton} id="roomButton">Join room</button>
-            </div>
+        </div>
     );
 };
 

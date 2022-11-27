@@ -58,7 +58,7 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
 
 // Join into a room
 //TODO return room object or room object id
-recordRoutes.route('/room').post(function (req, res)  {
+recordRoutes.route('/room').post(async function (req, res)  {
     const username = req.body.username;
     let player = new Player(username);
     console.log("New Player added!");
@@ -75,13 +75,14 @@ recordRoutes.route('/room').post(function (req, res)  {
             }
     });
 
-    let room = dbConnect
+    let room = await dbConnect
     //Suppose to return one record randomly from db where number_of_players less then 7
         .collection('rooms').aggregate([
             { $match: { number_of_players: {$lt: 7 } }},
             { $sample: { size: 1 } }
         ])
-    console.log(room)
+        
+    console.log(room);
     //res.json({player: player._id,
     //    room: room._id});
     res.json(room);
@@ -97,8 +98,10 @@ recordRoutes.route('/room').post(function (req, res)  {
 
 // Hit - request a card
 // '/hit?user=userID'
-recordRoutes.route('/hit').get(async function (_req, res) {
-        
+recordRoutes.route('/hit').post(function (req, res) {
+    console.log(req.body.playerId)
+    console.log(req.body.roomId)
+    res.status(200).send
 });
 
 recordRoutes.route('/double').post(function (req, res)  {

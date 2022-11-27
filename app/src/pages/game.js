@@ -1,24 +1,17 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+
 
 const Game = () => {
     const [params] = useSearchParams()
     
-    const handleHitButton = () =>  {
+    async function handleHitButton () {
         console.log("hitButton pressed");
-        const queryParams = {
-            playerId: params.get('playerId'),
-            roomId: params.get('roomId'),
-        };
         
-        const queryparams = new URLSearchParams(queryParams);
-        console.log(queryparams)
-        axios.get('http://localhost:4000/hit/?${queryparams}', {
-        
-        }).then(function(response){
-            console.log(response);
+        const response = await axios.post('http://localhost:4000/hit', {
+            playerId : params.get('playerId'),
+            roomId: params.get('roomId')
         });
     };
     const handleDoubleButton = () => {
