@@ -2,7 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
+import './game.css'
 const Game = () => {
     const [params] = useSearchParams();
     const [roomState, setRoomState] = useState({});
@@ -135,7 +135,8 @@ const Game = () => {
             if (roomState.players.length > 0) {
                 console.log(roomState);
                 return (
-                    <div>
+                    <div className='col-auto' >
+                        <h1>Other players</h1>
                         {
                             roomState.players.map((item, index) => {
                                 return <p key={index} >{item.name}</p>
@@ -150,16 +151,24 @@ const Game = () => {
     return (
         <div className='game-container'>
             <h1>Game</h1>
+            <div className='player-list'>
             {render_players()}
-            <p>Dealer's hand</p>
-            <button onClick={handleNewRoundButton} id="hitNewRound">New Round</button>
-            {
-                render_dealer_cards()
-            }
-            <p>Player's hand</p>
-            {
-                render_player_cards()
-            }
+            </div>
+            
+            <div className='dealer-cards'>
+                <p>Dealer's hand</p>
+                <button onClick={handleNewRoundButton} id="hitNewRound">New Round</button>     
+                {
+                    render_dealer_cards()
+                }
+            </div>
+            <div className='player-cards'>
+                <p>Player's hand</p>
+                {
+                    render_player_cards()
+                }
+            </div>
+            
             <div className='buttons'>
             <button className="btn btn-primary" onClick={handleHitButton} id="hitButton">Hit</button>
             <button className="btn btn-primary" onClick={handleDoubleButton} id="doubleButton">Double</button>
