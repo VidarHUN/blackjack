@@ -1,6 +1,6 @@
 import {React, useState} from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import {renderMatches, useNavigate} from 'react-router-dom';
 import './index.css';
 
 
@@ -9,7 +9,7 @@ const Index = () => {
     const [username, setUsername] = useState('');
 
     const handleChange = event => {
-        setUsername(event.target.value);
+        setUsername(event.target.value);  
     };
 
     async function handleNewRoom() {
@@ -44,24 +44,11 @@ const Index = () => {
         
     };
     
-    
-        // <div>
-        //     <h1 class="index_h1">Play blackjack with us!</h1>
-        //         <form>
-        //             <label>
-        //                 Enter your username!
-        //                 <input type="text" name="username" value={username} onChange={handleChange}/>
-        //             </label>
-        //         </form>
-        //         <button onClick={handleNewRoom} id="newRoomButton">Create a new room</button>
-        //         <button onClick={handleRoomButton} id="roomButton">Join room</button>
-        // </div>
-
     return (
-        <div className="Auth-form-container">
-        <form className="Auth-form">
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Play Blackjack!</h3>
+        <div className="index-form-container">
+        <form className="index-form">
+          <div className="index-form-content">
+            <h3 className="index-form-title">Play Blackjack!</h3>
             <div className="form-group mt-3">
               <label>Please enter your username! </label>
               <input
@@ -70,10 +57,10 @@ const Index = () => {
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary" onClick={handleNewRoom} id="newRoomButton" disabled="disabled">
+              <button type="button"  className="btn btn-primary" onClick={handleNewRoom} id="newRoomButton">
                 Create new room
               </button>
-              <button type="submit" className="btn btn-primary" button onClick={handleRoomButton} id="roomButton">
+              <button type="button" className="btn btn-primary" button onClick={handleRoomButton} id="roomButton">
                 Join room
               </button>
             </div>
