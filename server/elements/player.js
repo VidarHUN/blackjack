@@ -9,6 +9,7 @@ class Player {
         this.name = name;
         this.stand = false;
         this.bet = 0;
+        this.bet_second_hand = 0;
     }
 
     addRoomID(id) {
@@ -17,10 +18,10 @@ class Player {
 
     addCard(card, second_hand = false) {
         if (second_hand) {
-            this.second_hand += card;
+            this.second_hand.push(card);
         }
         else {
-            this.hand += card;
+            this.hand.push(card);
         }
     }
 
@@ -29,17 +30,25 @@ class Player {
     }
 
     removeChips(chips) {
-        this.chips -+ chips;
+        this.chips -= chips;
         if (this.chips <= 0) {
             throw new Error('Your chips are gone');
         }
     }
 
-    hit(second_hand = false) {
+    add_bet(chips, second_hand) {
+        if (second_hand) {
+            this.removeChips(chips);
+            this.bet_second_hand += chips;
+        }
+        else {
+            this.removeChips(chips);
+            this.bet += chips;
+        }
+    }
+
+    hit(room, second_hand) {
         if (!this.stand) {
-            // TODO: get room via room_id
-            // Just for now I will use this line
-            let room = new Room();
             if (second_hand) {
                 let card = room.hit();
                 this.addCard(card, second_hand);
@@ -54,13 +63,19 @@ class Player {
         }
     }
 
-    stand() {
+    set_stand() {
         this.stand = true;
     }
 
-    double() {
-        // TODO: Check if there is a second hand
-        if (this.hand.length >= 2) {
+    double(second_hand) {
+        if (second_hand) {
+            if (this.hand.length == 2) {
+                this.removeChips(this.bet_second_hand);
+                this.bet_second_hand *= 2;
+            }
+        }
+        else if (this.hand.length == 2) {
+            this.removeChips(this.bet);
             this.bet *= 2;
         }
         else {
@@ -69,10 +84,15 @@ class Player {
     }
 
     split() {
-        // TODO: Implement split
-        // When the player have pair in his hand he can't split these cards
-        // into two hands.
-        return undefined;
+        if (this.hand.length == 2) {
+            if (this.hand[0].value == this.hand[1].value){
+                let card = this.hand.shift();
+                this.second_hand.push(card);
+            }
+        }
+        else {
+            throw new Error('Can not split');
+        }
     }
 
     insurance() {
@@ -82,7 +102,6 @@ class Player {
 
     surrender() {
         this.hand = [];
-        this.second_hand = [];
         this.addChips(Math.ceil(this.bet / 2));
     }
 
@@ -93,13 +112,16 @@ class Player {
     }
 
     bust() {
-        this.hand = []
+        this.hand = [];
         this.bet = 0;
         this.stand = false;
     }
 
     push() {
-        return undefined;
+        this.hand = [];
+        this.addChips(Math.ceil(this.bet / 2));
+        this.bet = 0;
+        this.stand = false;
     }
 
     blackjack(prize) {
@@ -118,9 +140,7 @@ class Dealer extends Player {
     }
 
     hit() {
-        card = deck[0];
-        this.deck.push(this.deck.shift());
-        return card;
+        return this.deck.get_card();
     }
 }
 

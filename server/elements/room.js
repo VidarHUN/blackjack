@@ -7,7 +7,6 @@ class Room {
         player.addRoomID(this.id);
         this.dealer = dealer;
         this.players = [player];
-        this.number_of_players = 1;
     }
 
     addPlayer(player) {
@@ -16,7 +15,6 @@ class Room {
         }
         else {
             this.players.push(player);
-            this.number_of_players++;
         }
     }
 
@@ -28,12 +26,11 @@ class Room {
         }
         else {
             this.players.remove(player);
-            this.number_of_players--
         }
     }
 
     hit() {
-        return dealer.hit();
+        return this.dealer.hit();
     }
 }
 

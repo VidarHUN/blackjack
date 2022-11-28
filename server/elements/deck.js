@@ -17,6 +17,12 @@ class Deck {
             this.cards[j] = temp;
         }
     }
+
+    get_card() {
+        let card = this.cards.shift();
+        this.cards.push(card);
+        return card;
+    }
 }
 
 class Card {
