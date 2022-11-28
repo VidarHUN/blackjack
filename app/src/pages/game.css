@@ -1,0 +1,16 @@
+.game-container {
+
+    
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+  }
+
+.buttons {
+    background-color: black;
+    margin-right: 5px;
+  }
+
+.player-cards {
+    background-color: rgb(167, 6, 19);
+  }

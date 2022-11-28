@@ -5,6 +5,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background-color: blue;
 }
 
 .index-form {
@@ -13,12 +14,13 @@
   padding-top: 30px;
   padding-bottom: 20px;
   border-radius: 8px;
-  background-color: white;
+  background-color: rgb(240, 1, 1);
 }
 
 .index-form-content {
   padding-left: 12%;
   padding-right: 12%;
+  background-color: rgb(24, 194, 18);
 }
 
 .index-form-title {
