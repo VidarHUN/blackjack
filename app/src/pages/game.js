@@ -1,32 +1,91 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const Game = () => {
-    const [params] = useSearchParams()
-    
-    async function handleHitButton () {
+    const [params] = useSearchParams();
+    const [roomState, setRoomState] = useState({})
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const response =  await axios.post('http://localhost:4000/getRoom', {
+                roomId: params.get('roomId')
+            });
+            setRoomState(roomState => ({
+                ...roomState,
+                ...response
+            }));
+        }, 1000);
+
+        return () => clearInterval(interval);
+      }, []);
+
+    const handleHitButton = async () => {
         console.log("hitButton pressed");
-        
         const response = await axios.post('http://localhost:4000/hit', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response
+        }));
     };
-    const handleDoubleButton = () => {
-        console.log("doubleButton pressed")
+    const handleDoubleButton = async () => {
+        console.log("doubleButton pressed");
+        const response = await axios.post('http://localhost:4000/double', {
+            playerId : params.get('playerId'),
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response
+        }));
     };
-    const handleSplitButton = () => {
-        console.log("splitButton pressed")
+    const handleSplitButton = async () => {
+        console.log("splitButton pressed");
+        const response = await axios.post('http://localhost:4000/split', {
+            playerId : params.get('playerId'),
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response
+        }));
     };
-    const handleInsuranceButton = () => {
-        console.log("insuranceButton pressed")
+    const handleInsuranceButton = async () => {
+        console.log("insuranceButton pressed");
+        const response = await axios.post('http://localhost:4000/insurance', {
+            playerId : params.get('playerId'),
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response
+        }));
     };
-    const handleSurrenderButton = () => {
-        console.log("surrenderButton pressed")
+    const handleSurrenderButton = async () => {
+        console.log("surrenderButton pressed");
+        const response = await axios.post('http://localhost:4000/surrander', {
+            playerId : params.get('playerId'),
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response
+        }));
     };
-    const handlePushButton = () => {
-        console.log("pushButton pressed")
+    const handlePushButton = async () => {
+        console.log("pushButton pressed");
+        const response = await axios.post('http://localhost:4000/push', {
+            playerId : params.get('playerId'),
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response
+        }));
     };
 
     return (

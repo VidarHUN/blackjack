@@ -25,32 +25,7 @@ recordRoutes.route('/newRoom').post(function (req, res)  {
     let player = new Player(username);
     let room = new Room(dealer, player);
     ROOMS.push(room);
-
-    // const dbConnect = dbo.getDb();
-    // dbConnect
-    //     .collection('rooms')
-    //     .insertOne(room, function (err, result) {
-    //         if (err) {
-    //             res.status(400).send('Error inserting rooms!');
-    //             return;
-    //         } else {
-    //             console.log(`Added a new room with id ${result.insertedId}`);
-    //         }
-    // });
-    // dbConnect
-    //     .collection('players')
-    //     .insertMany([player, dealer], function (err, result) {
-    //         if (err) {
-    //             res.status(400).send('Error inserting players!');
-    //             return;
-    //         } else {
-    //             console.log(`Added a new player(s) with id ${result.insertedIds}`);
-    //         }
-    // });
-    res.json({
-        playerId: player._id,
-        roomId: room._id
-    });
+    res.json(room);
     res.status(200).send();
 });
 
@@ -62,53 +37,8 @@ recordRoutes.route('/room').post(function (req, res)  {
     console.log("New Player added!");
     let roomIndex = ROOMS.findIndex(element => element.players.length < 6);
     ROOMS[roomIndex].addPlayer(player);
-    res.json({
-        playerId: player._id,
-        roomId: ROOMS[roomIndex]._id
-    });
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
-
-    // const dbConnect = dbo.getDb();
-
-    // dbConnect
-    //     .collection('players')
-    //     .insertOne(player, function (err, result) {
-    //         if (err) {
-    //             res.status(400).send('Error inserting players!');
-    //             return;
-    //         } else {
-    //             console.log(`Added a new player with id ${result.insertedId}`);
-    //         }
-    // });
-
-    // dbConnect
-    //     .collection('rooms')
-    //     .aggregate([
-    //         {
-    //           '$match': {
-    //             '$nor': [
-    //               {
-    //                 'players': {
-    //                   '$size': 7
-    //                 }
-    //               }
-    //             ]
-    //           }
-    //         }, {
-    //           '$sample': {
-    //             'size': 1
-    //           }
-    //         }
-    //       ]).toArray().then(respond => {
-    //         if (respond) {
-    //             res.json(respond);
-    //             res.status(200).send();
-    //         }
-    //         else {
-    //             res.json([])
-    //             res.status(400).send('Could not find a free room!')
-    //         }
-    //     });
 });
 
 recordRoutes.route('/bet').post(function (req, res) {
@@ -119,7 +49,7 @@ recordRoutes.route('/bet').post(function (req, res) {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].add_bet(bet, second_hand);
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -131,7 +61,7 @@ recordRoutes.route('/hit').post(function (req, res) {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].hit(ROOMS[roomIndex], second_hand);
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -142,7 +72,7 @@ recordRoutes.route('/double').post(function (req, res)  {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].double(second_hand);
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -154,7 +84,7 @@ recordRoutes.route('/split').post(function (req, res)  {
     ROOMS[roomIndex].players[playerIndex].split();
     ROOMS[roomIndex].players[playerIndex].hit(ROOMS[roomIndex]);
     ROOMS[roomIndex].players[playerIndex].hit(ROOMS[roomIndex], true);
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -168,7 +98,7 @@ recordRoutes.route('/surrender').post(function (req, res)  {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].surrender();
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -178,7 +108,7 @@ recordRoutes.route('/bust').post(function (req, res)  {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].bust();
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -188,7 +118,7 @@ recordRoutes.route('/push').post(function (req, res)  {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].push();
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
@@ -199,7 +129,7 @@ recordRoutes.route('/blackjack').post(function (req, res)  {
     let roomIndex = ROOMS.findIndex(element => element._id == roomId);
     let playerIndex = ROOMS[roomIndex].players.findIndex(element => element._id == playerId);
     ROOMS[roomIndex].players[playerIndex].blackjack(prize);
-    res.json(ROOMS)
+    res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });
 
