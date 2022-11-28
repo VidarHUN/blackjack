@@ -32,6 +32,8 @@ const Game = () => {
     return (
         <div>
             <h1>Game</h1>
+            <p>Dealer's hand</p>
+            <img src='cards/JC.svg' alt=''/>
             <button onClick={handleHitButton} id="hitButton">Hit</button>
             <button onClick={handleDoubleButton} id="doubleButton">Double</button>
             <button onClick={handleSplitButton} id="splitButton">Split</button>
