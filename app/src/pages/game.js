@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 const Game = () => {
     const [params] = useSearchParams();
-    const [roomState, setRoomState] = useState({})
+    const [roomState, setRoomState] = useState({});
 
     useEffect(() => {
         const interval = setInterval(async () => {
@@ -14,85 +14,152 @@ const Game = () => {
             });
             setRoomState(roomState => ({
                 ...roomState,
-                ...response
+                ...response.data
             }));
+            // console.log(response.data);
         }, 1000);
 
         return () => clearInterval(interval);
       }, []);
 
+    const handleNewRoundButton = async () => {
+        const response = await axios.post('http://localhost:4000/newRound', {
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response.data
+        }));
+    };
+
     const handleHitButton = async () => {
-        console.log("hitButton pressed");
         const response = await axios.post('http://localhost:4000/hit', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
         setRoomState(roomState => ({
             ...roomState,
-            ...response
+            ...response.data
         }));
     };
+
     const handleDoubleButton = async () => {
-        console.log("doubleButton pressed");
         const response = await axios.post('http://localhost:4000/double', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
         setRoomState(roomState => ({
             ...roomState,
-            ...response
+            ...response.data
         }));
     };
     const handleSplitButton = async () => {
-        console.log("splitButton pressed");
         const response = await axios.post('http://localhost:4000/split', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
         setRoomState(roomState => ({
             ...roomState,
-            ...response
+            ...response.data
         }));
     };
     const handleInsuranceButton = async () => {
-        console.log("insuranceButton pressed");
         const response = await axios.post('http://localhost:4000/insurance', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
         setRoomState(roomState => ({
             ...roomState,
-            ...response
+            ...response.data
         }));
     };
     const handleSurrenderButton = async () => {
-        console.log("surrenderButton pressed");
         const response = await axios.post('http://localhost:4000/surrander', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
         setRoomState(roomState => ({
             ...roomState,
-            ...response
+            ...response.data
         }));
     };
     const handlePushButton = async () => {
-        console.log("pushButton pressed");
         const response = await axios.post('http://localhost:4000/push', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
         setRoomState(roomState => ({
             ...roomState,
-            ...response
+            ...response.data
         }));
     };
+
+    function render_dealer_cards(){
+        if (Object.keys(roomState).length != 0) {
+            if (roomState.dealer.hand.length > 0) {
+                return (
+                    <div>
+                        {
+                            roomState.dealer.hand.map((item, index) => {
+                                return <img key={index} src={'cards/' + item.name + '.svg'} alt=''></img>
+                            })
+                        }
+                    </div>
+                )
+            }
+        }
+    }
+
+    function render_player_cards(){
+        if (Object.keys(roomState).length != 0) {
+            let playerIndex = roomState.players.findIndex(element => element._id == params.get('playerId'));
+            if (roomState.players.length > 0) {
+                // console.log(roomState.players[playerIndex].hand);
+                if (roomState.players[playerIndex].hand.length > 0) {
+                    return (
+                        <div>
+                            {
+                                roomState.players[playerIndex].hand.map((item, index) => {
+                                    return <img key={index} src={'cards/' + item.name + '.svg'} alt=''></img>
+                                })
+                            }
+                        </div>
+                    )
+                }
+            }
+        }
+    }
+
+    function render_players(){
+        if (Object.keys(roomState).length != 0) {
+            if (roomState.players.length > 0) {
+                console.log(roomState);
+                return (
+                    <div>
+                        {
+                            roomState.players.map((item, index) => {
+                                return <p key={index} >{item.name}</p>
+                            })
+                        }
+                    </div>
+                )
+            }
+        }
+    }
 
     return (
         <div>
             <h1>Game</h1>
+            {render_players()}
             <p>Dealer's hand</p>
-            <img src='cards/JC.svg' alt=''/>
+            <button onClick={handleNewRoundButton} id="hitNewRound">New Round</button>
+            {
+                render_dealer_cards()
+            }
+            <p>Player's hand</p>
+            {
+                render_player_cards()
+            }
             <button onClick={handleHitButton} id="hitButton">Hit</button>
             <button onClick={handleDoubleButton} id="doubleButton">Double</button>
             <button onClick={handleSplitButton} id="splitButton">Split</button>

@@ -30,7 +30,7 @@ class Room {
     }
 
     hit() {
-        return this.dealer.hit();
+        return this.dealer.from_deck();
     }
 }
 

@@ -19,6 +19,7 @@ let ROOMS = [];
 // Create a new room
 recordRoutes.route('/newRoom').post(function (req, res)  {
     const username = req.body.username;
+    console.log(req.body);
     let deck = new Deck();
     deck.shuffle();
     let dealer = new Dealer(deck)
@@ -37,6 +38,22 @@ recordRoutes.route('/room').post(function (req, res)  {
     console.log("New Player added!");
     let roomIndex = ROOMS.findIndex(element => element.players.length < 6);
     ROOMS[roomIndex].addPlayer(player);
+    res.json(ROOMS[roomIndex]);
+    res.status(200).send();
+});
+
+recordRoutes.route('/getRoom').post(function (req, res)  {
+    const roomId = req.body.roomId;
+    let roomIndex = ROOMS.findIndex(element => element._id == roomId);
+    res.json(ROOMS[roomIndex]);
+    res.status(200).send();
+});
+
+recordRoutes.route('/newRound').post(function (req, res) {
+    const roomId = req.body.roomId;
+    let roomIndex = ROOMS.findIndex(element => element._id == roomId);
+    ROOMS[roomIndex].dealer.hit(ROOMS[roomIndex], false);
+    ROOMS[roomIndex].dealer.hit(ROOMS[roomIndex], false);
     res.json(ROOMS[roomIndex]);
     res.status(200).send();
 });

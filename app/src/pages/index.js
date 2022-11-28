@@ -9,7 +9,7 @@ const Index = () => {
     const [username, setUsername] = useState('');
 
     const handleChange = event => {
-        setUsername(event.target.value);  
+        setUsername(event.target.value);
     };
 
     async function handleNewRoom() {
@@ -17,16 +17,17 @@ const Index = () => {
         const response = await axios.post('http://localhost:4000/newRoom', {
             username: username
         });
-        
+
         let params = new URLSearchParams();
-        params.append("playerId", response.data.player)
-        params.append("roomId", response.data.room)
+        let player = response.data.players.pop();
+        params.append("playerId", player._id);
+        params.append("roomId", response.data._id);
         if(response.status === 200){
-            console.log(response.data)
+            console.log(response.data);
             navigate('/game?' + params.toString());
         } else {
-            console.log("User or room creation failed")
-        }      
+            console.log("User or room creation failed");
+        }
     };
 
     async function handleRoomButton() {
@@ -35,9 +36,12 @@ const Index = () => {
             username: username
         });
 
+        let params = new URLSearchParams();
+        let player = response.data.players.pop();
+        params.append("playerId", player._id);
+        params.append("roomId", response.data._id);
         if(response.status === 200){
-            
-            navigate('/game');
+            navigate('/game?' + params.toString());
         } else {
             console.log("User creation or room selection failed")
         }   
@@ -54,6 +58,7 @@ const Index = () => {
               <input
                 type="text"
                 className="form-control mt-1"
+                onChange={handleChange}
               />
             </div>
             <div className="d-grid gap-2 mt-3">

@@ -136,10 +136,9 @@ class Dealer extends Player {
     constructor(deck, name = "Dealer") {
         super(name);
         this.deck = deck;
-        console.log(this);
     }
 
-    hit() {
+    from_deck () {
         return this.deck.get_card();
     }
 }

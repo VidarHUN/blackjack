@@ -1,4 +1,4 @@
-const SUITS = ["s", "c", "h", "d"];
+const SUITS = ["S", "C", "H", "D"];
 const VALUES = ["A", "2", "3", "4",
                 "5", "6", "7", "8",
                 "9", "10", "J", "Q", "K"];
@@ -29,6 +29,7 @@ class Card {
     constructor(suit, value) {
         this.suit = suit;
         this.value = value;
+        this.name = this.value + this.suit;
     }
 }
 
