@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/VidarHUN/blackjack/issues"
   },
-  "homepage": "https://github.com/VidarHUN/blackjack#readme"
+  "homepage": "https://github.com/VidarHUN/blackjack#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
 }
