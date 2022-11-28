@@ -2,18 +2,45 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import './game.css';
 
 const Game = () => {
-    const [params] = useSearchParams()
-    
-    async function handleHitButton () {
-        console.log("hitButton pressed");
-        
+    const [params] = useSearchParams();
+    const [roomState, setRoomState] = useState({});
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const response =  await axios.post('http://localhost:4000/getRoom', {
+                roomId: params.get('roomId')
+            });
+            setRoomState(roomState => ({
+                ...roomState,
+                ...response.data
+            }));
+            // console.log(response.data);
+        }, 1000);
+
+        return () => clearInterval(interval);
+      }, []);
+
+    const handleNewRoundButton = async () => {
+        const response = await axios.post('http://localhost:4000/newRound', {
+            roomId: params.get('roomId')
+        });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response.data
+        }));
+    };
+
+    const handleHitButton = async () => {
         const response = await axios.post('http://localhost:4000/hit', {
             playerId : params.get('playerId'),
             roomId: params.get('roomId')
         });
+        setRoomState(roomState => ({
+            ...roomState,
+            ...response.data
+        }));
     };
 
     const handleDoubleButton = async () => {
@@ -121,20 +148,27 @@ const Game = () => {
     }
 
     return (
-        <div>
+        <div className='game-container'>
             <h1>Game</h1>
             {render_players()}
-        <div className="game-container">
-
-            <h1>Game</h1>
             <p>Dealer's hand</p>
-            <img src='cards/JC.svg' alt=''/>
-            <button onClick={handleHitButton} id="hitButton">Hit</button>
-            <button onClick={handleDoubleButton} id="doubleButton">Double</button>
-            <button onClick={handleSplitButton} id="splitButton">Split</button>
-            <button onClick={handleInsuranceButton} id="insuranceButton">Insurance</button>
-            <button onClick={handleSurrenderButton} id="surrenderButton">Surrender</button>
-            <button onClick={handlePushButton} id="pushButton">Push</button>
+            <button onClick={handleNewRoundButton} id="hitNewRound">New Round</button>
+            {
+                render_dealer_cards()
+            }
+            <p>Player's hand</p>
+            {
+                render_player_cards()
+            }
+            <div className='buttons'>
+            <button className="btn btn-primary" onClick={handleHitButton} id="hitButton">Hit</button>
+            <button className="btn btn-primary" onClick={handleDoubleButton} id="doubleButton">Double</button>
+            <button className="btn btn-primary" onClick={handleSplitButton} id="splitButton">Split</button>
+            <button className="btn btn-primary" onClick={handleInsuranceButton} id="insuranceButton">Insurance</button>
+            <button className="btn btn-primary" onClick={handleSurrenderButton} id="surrenderButton">Surrender</button>
+            <button className="btn btn-primary" onClick={handlePushButton} id="pushButton">Push</button>
+            </div>
+            
         </div>
     );
 };
